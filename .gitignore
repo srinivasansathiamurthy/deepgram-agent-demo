@@ -1,0 +1,19 @@
+# environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Node
+node_modules/
+frontend/dist/
+
+# sessions and recordings
+sessions/
+audio_capture/
+
+# OS
+.DS_Store
