@@ -181,6 +181,31 @@ cd frontend && npm run dev
 
 ---
 
+## TODO
+
+### Deepgram docs ingestion
+- [ ] Fetch and parse `https://developers.deepgram.com/llms.txt` into structured knowledge (endpoints, models, parameters, code examples)
+- [ ] Functions to query that knowledge at runtime so the agent can cite specific, up-to-date doc content rather than relying solely on training data
+- [ ] Refresh strategy (cron or on-demand) so the knowledge stays current as Deepgram ships new features
+
+### Diarization pipeline
+- [ ] Script to run speaker diarization on any WAV in `audio_capture/` — stereo files already have system audio on L and mic on R, so channel splitting gives a free head start before model-based diarization
+- [ ] Output per-speaker turn transcripts aligned to timestamps, ready for eval scoring
+
+### Eval harness
+- [ ] Curate a golden question set derived from the parsed `llms.txt` (factual recall, API parameter lookup, SDK usage, edge cases)
+- [ ] Eval runner script: sends each question to the voice agent, captures the spoken response, transcribes it, stores `(question, response, label)` triples
+- [ ] Judge model (e.g. Claude) that scores each response against the ground-truth answer on accuracy, completeness, and conciseness — outputs a numeric score + short rationale per question
+- [ ] Aggregate scoring: mean score per run, per-question breakdown, failure analysis
+
+### Iteration loop (control vs. experimental)
+- [ ] **Iteration 1** — baseline: run eval on current `control` harness; record mean score and failure modes
+- [ ] **Iteration 2** — first change (e.g. improved system prompt or doc grounding); label runs `experimental`; compare score delta against control with judge rationales
+- [ ] **Iteration 3** — second change informed by iteration 2 failure analysis; promote winning config to new `control` baseline
+- [ ] Lightweight results tracker (CSV or JSON) so scores across iterations are comparable at a glance
+
+---
+
 ## API endpoints
 
 | Method | Path | Description |
