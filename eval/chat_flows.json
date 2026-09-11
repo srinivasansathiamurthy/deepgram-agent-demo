@@ -1,0 +1,192 @@
+[
+  {
+    "id": "flow_01",
+    "title": "Nova STT — Models, Features, and API Usage",
+    "topic_area": "Speech-to-Text / Models",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["nova-3 capabilities", "nova-2 fallback", "model parameter", "multilingual", "batch vs streaming", "customization"],
+    "questions": [
+      "What is the Nova three model and what kinds of audio is it best at?",
+      "How much more accurate is Nova three compared to older models or competitors?",
+      "What's the difference between Nova three and Nova two, and when would I still pick Nova two?",
+      "My recordings have a lot of medical terminology — will Nova three handle that without custom training?",
+      "I need to transcribe audio in Japanese and Portuguese — does Nova three support those?",
+      "How do I actually specify Nova three in an API request?",
+      "Can I use Nova three for both real-time streaming and batch files, or just one?",
+      "What is self-serve customization and how does it work without retraining the model?",
+      "If I need filler word detection like um and uh, should I use Nova three or Nova two?",
+      "Are there any features Nova three doesn't support yet that I should know about?"
+    ]
+  },
+  {
+    "id": "flow_02",
+    "title": "Flux STT — Real-time End-of-Turn Detection",
+    "topic_area": "Speech-to-Text / Flux",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["what Flux is", "EOT detection", "eager EOT", "Flux vs Nova comparison", "migration", "API endpoint v2"],
+    "questions": [
+      "What is Flux and how is it different from Nova for speech to text?",
+      "What does end-of-turn detection mean and why does it matter for voice agents?",
+      "What's the eot threshold parameter and what does changing it actually do?",
+      "My voice agent cuts off users too early — should I raise or lower the eot threshold?",
+      "What is eager end of turn and when should I turn it on?",
+      "What endpoint do I call for Flux — is it the same as Nova?",
+      "Does Flux support multiple languages or is it English only?",
+      "I'm already using Nova three in my voice agent — what would I gain by switching to Flux?",
+      "What Nova features would I lose if I migrate to Flux?",
+      "What does migration from Nova to Flux actually look like in my code?"
+    ]
+  },
+  {
+    "id": "flow_03",
+    "title": "Aura TTS — Voices, Languages, and REST API",
+    "topic_area": "Text-to-Speech / Aura",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["Aura voices", "Aura-2 multilingual", "speak endpoint", "streaming vs single request", "audio formats"],
+    "questions": [
+      "I want to add voice output to my app — what text-to-speech options does Deepgram offer?",
+      "What voices are available in Aura and how do I pick one?",
+      "Is there a difference between American, British, and Irish English voices in terms of quality?",
+      "How do I call the text-to-speech API — what endpoint and what does the request body look like?",
+      "What audio formats does the API return — can I get MP3?",
+      "My app needs to speak in Spanish and French as well as English — what model do I use for that?",
+      "What is Aura two and how is it different from the original Aura?",
+      "Can I stream the TTS audio back in real time instead of waiting for the whole clip?",
+      "Is there any way to control speaking rate, pitch, or emphasis?",
+      "Are there any latency differences between streaming TTS and a single full-request approach?"
+    ]
+  },
+  {
+    "id": "flow_04",
+    "title": "Flux TTS — Low-latency Streaming Speech",
+    "topic_area": "Text-to-Speech / Flux",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["Flux TTS vs Aura", "streaming output", "latency", "voice agent integration", "endpoint format", "language support"],
+    "questions": [
+      "What is Flux TTS and what makes it different from the Aura models?",
+      "Why would I choose Flux TTS over Aura two for a new project?",
+      "How low is the latency on Flux TTS compared to Aura?",
+      "Does Flux TTS support real-time streaming output or is it all-at-once?",
+      "What languages does Flux TTS support?",
+      "What does the API endpoint look like for Flux TTS versus the Aura endpoint?",
+      "I'm building a voice agent — should I use Flux TTS or Aura for the spoken responses?",
+      "Is there a Flux TTS equivalent of the Aura voice names, like asteria or helios?",
+      "Can I use Flux TTS for a multilingual application where users switch between English and Spanish?",
+      "Are there any known limitations of Flux TTS I should plan around?"
+    ]
+  },
+  {
+    "id": "flow_05",
+    "title": "Voice Agent Setup and Configuration",
+    "topic_area": "Voice Agent API / Setup",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["Settings message", "listen/think/speak components", "LLM model selection", "system prompt", "greeting", "WebSocket connection"],
+    "questions": [
+      "I want to build a conversational voice agent using Deepgram — what's the overall architecture?",
+      "How do I connect to the Voice Agent API — is it a REST call or a WebSocket?",
+      "What goes inside the Settings message I send at the start of a session?",
+      "Which LLM providers and models can I use for the thinking component?",
+      "How do I write a system prompt to give the agent a specific personality or scope?",
+      "Should I use Nova or Flux for the speech-to-text layer inside a voice agent?",
+      "How do I set a greeting the agent speaks when it first connects?",
+      "Can I configure the TTS voice the agent uses for responses?",
+      "What's the difference between the listen, think, and speak sections of the config?",
+      "Can the agent handle multiple languages in a single session, or do I need separate configs?"
+    ]
+  },
+  {
+    "id": "flow_06",
+    "title": "Voice Agent Function Calling",
+    "topic_area": "Voice Agent API / Functions",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["function definition schema", "client-side vs server-side", "FunctionCallRequest", "FunctionCallResponse", "defer_until_eot", "error handling"],
+    "questions": [
+      "How do I give my voice agent the ability to call external functions or APIs?",
+      "What's the difference between a client-side and a server-side function in the Voice Agent API?",
+      "I want to look up a user's account data when they ask about it — client side or server side?",
+      "How do I define a function in the Settings message — what fields are required?",
+      "What does the FunctionCallRequest look like when the agent decides to call my function?",
+      "How do I send the function result back to the agent so it can continue the conversation?",
+      "What is defer until end of turn and when should I use it versus leaving it off?",
+      "Can the agent call more than one function in a single turn?",
+      "What should I do if my function returns an error — how do I communicate that back gracefully?",
+      "Is there a way to cancel a function call if the user interrupts mid-sentence?"
+    ]
+  },
+  {
+    "id": "flow_07",
+    "title": "Authentication, API Keys, and Project Management",
+    "topic_area": "Auth / Account Management",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["API key creation", "scopes", "token-based auth", "project management", "rate limits", "usage monitoring"],
+    "questions": [
+      "How do I authenticate requests to the Deepgram API?",
+      "What's the format for including an API key in my requests?",
+      "How do I create a new API key for my project?",
+      "Can I limit what an API key is allowed to do — like only speech to text, no account management?",
+      "What scopes are available and how do I set them when creating a key?",
+      "How do I manage multiple projects if I have different apps or teams?",
+      "What rate limits does Deepgram enforce and how do I find out what mine are?",
+      "Is there a way to monitor how much API usage I've consumed this month?",
+      "What happens if I hit the concurrency limit — do requests fail or queue?",
+      "How do I add a team member to my Deepgram project with limited permissions?"
+    ]
+  },
+  {
+    "id": "flow_08",
+    "title": "SDKs and CLI Developer Tools",
+    "topic_area": "SDKs / CLI",
+    "branches_expected": ["docs"],
+    "doc_areas": ["Python SDK", "JavaScript SDK", "Go SDK", "CLI installation", "CLI transcription", "CLI TTS", "feature matrix"],
+    "questions": [
+      "Does Deepgram have official SDKs I can use instead of calling the REST API directly?",
+      "I'm working in Python — how do I install and get started with the Python SDK?",
+      "Can you show me what a basic transcription request looks like using the Python SDK?",
+      "Is there a JavaScript SDK, and does it work in Node as well as the browser?",
+      "Does the SDK support all the same features as calling the REST API directly, or are there gaps?",
+      "Is there a Go SDK available?",
+      "What is the Deepgram CLI and what can I do with it?",
+      "How do I install the CLI and authenticate it with my API key?",
+      "Can I do a quick real-time transcription test straight from the terminal?",
+      "Does the CLI support text to speech output as well as transcription?"
+    ]
+  },
+  {
+    "id": "flow_09",
+    "title": "Pre-recorded Transcription Features",
+    "topic_area": "Speech-to-Text / Pre-recorded & Features",
+    "branches_expected": ["docs", "api_docs"],
+    "doc_areas": ["batch transcription", "speaker diarization", "word timestamps", "smart formatting", "PII redaction", "webhooks", "supported audio formats"],
+    "questions": [
+      "I have a library of recorded customer calls I need to transcribe in bulk — what's the best approach?",
+      "How do I submit a pre-recorded audio file to the API?",
+      "What audio and video formats does Deepgram accept for pre-recorded transcription?",
+      "My calls have two speakers — can Deepgram separate who said what?",
+      "How do I enable speaker diarization in my API request?",
+      "Can I get the exact timestamp for each word in the transcript?",
+      "Is there automatic punctuation and sentence formatting, or do I get raw text?",
+      "Some of my recordings include names, phone numbers, and credit card numbers — can Deepgram redact those?",
+      "I have files that take a while to process — is there a way to get notified via webhook when done instead of polling?",
+      "What's the maximum file size or duration I can submit for batch transcription?"
+    ]
+  },
+  {
+    "id": "flow_10",
+    "title": "Telephony Integrations and Deployment",
+    "topic_area": "Integrations / Platform",
+    "branches_expected": ["docs"],
+    "doc_areas": ["Twilio STT/TTS/Voice Agent", "Pipecat", "LiveKit", "Amazon Connect", "telephony agent", "self-hosted", "deployment options", "regional endpoints"],
+    "questions": [
+      "Can I use Deepgram with Twilio to transcribe phone calls in real time?",
+      "How does the Twilio and Deepgram integration work — does audio stream directly?",
+      "I'm using Pipecat to build a voice pipeline — how does Deepgram plug into that?",
+      "Does Deepgram work with LiveKit for WebRTC-based voice applications?",
+      "I'm building on Amazon Connect for a call center — is Deepgram compatible with that?",
+      "Can the Voice Agent API handle inbound phone calls directly, like as a Twilio webhook?",
+      "Is there a way to build an outbound calling agent that Deepgram initiates?",
+      "My company has data sovereignty requirements and can't use cloud APIs — does Deepgram offer on-premises deployment?",
+      "What are the different deployment options — is it just US cloud, or are there other regions?",
+      "How do I get access to self-hosted Deepgram for my enterprise setup?"
+    ]
+  }
+]

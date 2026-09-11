@@ -62,7 +62,7 @@ export default function App() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {activeTab === "agent" && (
             <button
-              onClick={newSession}
+              onClick={() => newSession()}
               title="End current session and start a fresh one"
               style={{
                 padding:      "8px 16px",
@@ -115,7 +115,7 @@ export default function App() {
               letterSpacing: "0.01em",
             }}
           >
-            {tab === "agent"   ? "Voice Agent"   : "Audio Capture"}
+            {tab === "agent" ? "Voice Agent" : "Audio Capture"}
           </button>
         ))}
       </div>

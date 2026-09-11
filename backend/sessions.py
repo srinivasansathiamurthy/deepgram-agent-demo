@@ -1,3 +1,4 @@
+import json
 import time
 import uuid
 from pathlib import Path
@@ -8,10 +9,11 @@ from config import SESSIONS_DIR
 class Session:
     """Owns one on-disk session: creates its directory and appends to chat_history.txt."""
 
-    def __init__(self) -> None:
+    def __init__(self, flow_id: str | None = None) -> None:
         self.session_id  = f"session_{int(time.time() * 1000)}_{uuid.uuid4().hex[:8]}"
         self.session_dir = SESSIONS_DIR / self.session_id
         self.chat_file   = self.session_dir / "chat_history.txt"
+        self.flow_id     = flow_id
         self._create()
 
     def _create(self) -> None:
@@ -20,6 +22,14 @@ class Session:
             f"# Deepgram Documentation Voice Agent — Session {self.session_id}\n"
             f"# Started: {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n",
             encoding="utf-8",
+        )
+        meta = {
+            "session_id": self.session_id,
+            "started_at": int(time.time()),
+            "flow_id":    self.flow_id,
+        }
+        (self.session_dir / "metadata.json").write_text(
+            json.dumps(meta, indent=2), encoding="utf-8"
         )
 
     def append_chat(self, role: str, content: str) -> None:

@@ -23,6 +23,7 @@ from config import DEEPGRAM_API_KEY, SESSIONS_DIR, AUDIO_CAPTURE_DIR
 from capture import router as capture_router
 from agent import router as agent_router
 from docs import router as docs_router
+from eval import router as eval_router
 
 # ── lifespan ───────────────────────────────────────────────────────────────────
 
@@ -45,6 +46,7 @@ app.add_middleware(
 app.include_router(capture_router)
 app.include_router(agent_router)
 app.include_router(docs_router)
+app.include_router(eval_router)
 
 # ── health ─────────────────────────────────────────────────────────────────────
 

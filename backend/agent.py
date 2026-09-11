@@ -50,15 +50,16 @@ def build_settings() -> dict:
 
 
 @router.websocket("/api/voice-agent")
-async def voice_agent_ws(browser_ws: WebSocket):
+async def voice_agent_ws(browser_ws: WebSocket, flow_id: str | None = None):
     await browser_ws.accept()
 
-    session = Session()
-    print(f"[{session.session_id}] Browser connected.")
+    session = Session(flow_id=flow_id)
+    print(f"[{session.session_id}] Browser connected. flow_id={flow_id!r}")
 
     await browser_ws.send_text(json.dumps({
         "type":       "SessionCreated",
         "session_id": session.session_id,
+        "flow_id":    flow_id,
     }))
 
     dg_headers = {"Authorization": f"Token {DEEPGRAM_API_KEY}"}

@@ -91,10 +91,10 @@ export interface VoiceAgentState {
 }
 
 export interface VoiceAgentActions {
-  startSession: () => Promise<void>;
+  startSession: (flowId?: string) => Promise<void>;
   stopSession:  () => void;
   togglePause:  () => void;
-  newSession:   () => void;
+  newSession:   (flowId?: string) => void;
 }
 
 // ── audio utilities ───────────────────────────────────────────────────────────
@@ -504,7 +504,7 @@ export function useVoiceAgent(): VoiceAgentState & VoiceAgentActions {
    * to Deepgram and sends the agent Settings.  Simultaneously request mic
    * permission (this happens inside ws.onopen so it's gated on connection success).
    */
-  const startSession = useCallback(async () => {
+  const startSession = useCallback(async (flowId?: string) => {
     if (wsRef.current) return;   // already running
 
     setMode("connecting");
@@ -514,7 +514,8 @@ export function useVoiceAgent(): VoiceAgentState & VoiceAgentActions {
     pausedRef.current = false;
 
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const wsUrl    = `${protocol}//${window.location.host}${WS_URL}`;
+    const qs       = flowId ? `?flow_id=${encodeURIComponent(flowId)}` : "";
+    const wsUrl    = `${protocol}//${window.location.host}${WS_URL}${qs}`;
     const ws       = new WebSocket(wsUrl);
     wsRef.current  = ws;
     attachWsHandlers(ws);
@@ -550,14 +551,14 @@ export function useVoiceAgent(): VoiceAgentState & VoiceAgentActions {
    * This creates a new server-side session directory, a new chat_history.txt,
    * and a new Deepgram conversation with the welcome greeting.
    */
-  const newSession = useCallback(() => {
+  const newSession = useCallback((flowId?: string) => {
     cleanupAll();
     setMode("disconnected");
     setMessages([]);
     setSessionId(null);
     setError(null);
     // Brief delay so React flushes the disconnected state before reconnecting.
-    setTimeout(() => startSession(), 150);
+    setTimeout(() => startSession(flowId), 150);
   }, [startSession]);
 
   return {
