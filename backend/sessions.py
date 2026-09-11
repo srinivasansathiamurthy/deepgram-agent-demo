@@ -26,3 +26,9 @@ class Session:
         stamp = int(time.time())
         with self.chat_file.open("a", encoding="utf-8") as fh:
             fh.write(f"[{stamp}] {role.upper()}: {content}\n")
+
+    def append_function_call(self, query: str, result: str) -> None:
+        stamp = int(time.time())
+        with self.chat_file.open("a", encoding="utf-8") as fh:
+            fh.write(f"[{stamp}] FUNCTION_CALL lookup_deepgram_docs: {query}\n")
+            fh.write(f"[{stamp}] FUNCTION_RESULT ({len(result)} chars):\n{result}\n")

@@ -177,6 +177,9 @@ export function useVoiceAgent(): VoiceAgentState & VoiceAgentActions {
   // Set to true when AgentAudioDone fires; the last source's onended uses this
   // to know it's the final chunk and should transition mode back to idle.
   const agentDoneRef = useRef(false);
+  // True while the server is executing a function call lookup. Prevents
+  // AgentAudioDone (fired after the injected ack message) from going to idle.
+  const functionCallInProgressRef = useRef(false);
 
   // ── audio context (created once, reused) ────────────────────────────────────
   function ensureAudioContext(): AudioContext {
@@ -222,16 +225,20 @@ export function useVoiceAgent(): VoiceAgentState & VoiceAgentActions {
 
       source.onended = () => {
         activeSourcesRef.current.delete(source);
-        // When all audio has played AND AgentAudioDone has fired, go idle.
+        // When all audio has played AND AgentAudioDone has fired, transition.
         if (
           agentDoneRef.current &&
           activeSourcesRef.current.size === 0 &&
           playQueueRef.current.length === 0
         ) {
           agentDoneRef.current = false;
-          setMode((prev) =>
-            prev === "agent_speaking" ? (pausedRef.current ? "paused" : "idle") : prev
-          );
+          if (functionCallInProgressRef.current) {
+            setMode("thinking");
+          } else {
+            setMode((prev) =>
+              prev === "agent_speaking" ? (pausedRef.current ? "paused" : "idle") : prev
+            );
+          }
         }
       };
 
@@ -393,6 +400,7 @@ export function useVoiceAgent(): VoiceAgentState & VoiceAgentActions {
         case "UserStartedSpeaking":
           // Discard buffered TTS chunks and stop any already-playing nodes.
           cutPlayback();
+          functionCallInProgressRef.current = false;
           setMode("user_speaking");
           break;
 
@@ -432,12 +440,21 @@ export function useVoiceAgent(): VoiceAgentState & VoiceAgentActions {
         // ── all TTS audio for this turn has been sent by Deepgram ─────────────
         case "AgentAudioDone":
           agentDoneRef.current = true;
-          // If the scheduler has already drained everything, go idle now.
+          // If the scheduler has already drained everything, transition now.
           // Otherwise the last source's onended will handle the transition.
           if (activeSourcesRef.current.size === 0 && playQueueRef.current.length === 0) {
             agentDoneRef.current = false;
-            setMode(pausedRef.current ? "paused" : "idle");
+            setMode(functionCallInProgressRef.current ? "thinking" : (pausedRef.current ? "paused" : "idle"));
           }
+          break;
+
+        case "FunctionCallStarted":
+          functionCallInProgressRef.current = true;
+          setMode("thinking");
+          break;
+
+        case "FunctionCallCompleted":
+          functionCallInProgressRef.current = false;
           break;
 
         // ── error from Deepgram or backend ────────────────────────────────────

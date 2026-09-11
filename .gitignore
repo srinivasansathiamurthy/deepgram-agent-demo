@@ -15,5 +15,8 @@ frontend/dist/
 sessions/
 audio_capture/
 
+# debug snapshots (regenerated on startup)
+debug/
+
 # OS
 .DS_Store
