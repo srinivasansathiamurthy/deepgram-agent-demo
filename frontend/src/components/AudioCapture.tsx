@@ -10,10 +10,10 @@ interface Device {
   is_default:   boolean;
 }
 
-interface ChatFlow {
-  id:        string;
-  title:     string;
-  questions: string[];
+interface EvalQuestion {
+  id:           string;
+  question:     string;
+  source_topic: string;
 }
 
 type Label = "control" | "experimental";
@@ -28,8 +28,8 @@ export function AudioCapture() {
   const [micEnabled,     setMicEnabled]   = useState(true);
   const [micDeviceIndex, setMicDevice]    = useState<number | null>(null);
   const [label,          setLabel]        = useState<Label>("control");
-  const [flows,          setFlows]        = useState<ChatFlow[]>([]);
-  const [selectedFlowId, setSelectedFlow] = useState<string | null>(null);
+  const [evalQuestions,  setEvalQuestions] = useState<EvalQuestion[]>([]);
+  const [evalEnabled,    setEvalEnabled]   = useState(false);
   const [recording,      setRecording]    = useState(false);
   const [startTs,        setStartTs]      = useState<number | null>(null);
   const [elapsed,        setElapsed]      = useState(0);
@@ -48,19 +48,19 @@ export function AudioCapture() {
   useEffect(() => {
     const init = async () => {
       try {
-        const [devRes, statusRes, flowsRes] = await Promise.all([
+        const [devRes, statusRes, evalRes] = await Promise.all([
           fetch("/api/capture/devices"),
           fetch("/api/capture/status"),
-          fetch("/api/eval/flows"),
+          fetch("/api/eval/questions"),
         ]);
         const devData    = await devRes.json();
         const statusData = await statusRes.json();
-        const flowsData  = await flowsRes.json();
+        const evalData   = await evalRes.json();
 
         setSdAvailable(devData.sounddevice_available);
         setInstallHint(devData.install_hint ?? "");
         setDevices(devData.devices ?? []);
-        setFlows(Array.isArray(flowsData) ? flowsData : []);
+        setEvalQuestions(Array.isArray(evalData) ? evalData : []);
 
         // Auto-select BlackHole for system audio, built-in mic for mic
         const devs: Device[] = devData.devices ?? [];
@@ -115,7 +115,7 @@ export function AudioCapture() {
           label,
           device_index:     deviceIndex,
           mic_device_index: micEnabled ? micDeviceIndex : null,
-          flow_id:          selectedFlowId ?? null,
+          flow_id:          evalEnabled ? "eval_questions" : null,
         }),
       });
       const data = await res.json();
@@ -127,7 +127,7 @@ export function AudioCapture() {
     } catch {
       setError("Could not reach backend.");
     }
-  }, [label, deviceIndex, micEnabled, micDeviceIndex, selectedFlowId]);
+  }, [label, deviceIndex, micEnabled, micDeviceIndex, evalEnabled]);
 
   // ── stop ──────────────────────────────────────────────────────────────────────
   const stopCapture = useCallback(async () => {
@@ -189,8 +189,6 @@ export function AudioCapture() {
     );
   }
 
-  const selectedFlow = flows.find((f) => f.id === selectedFlowId) ?? null;
-
   return (
     <div style={styles.page}>
       <div style={styles.card}>
@@ -198,8 +196,8 @@ export function AudioCapture() {
         <p style={styles.muted}>
           Records from any audio input device. Use{" "}
           <strong style={{ color: "var(--text)" }}>BlackHole 2ch</strong> to capture Mac
-          system output. When a QA flow is selected, questions are spoken automatically via
-          TTS after each agent response.
+          system output. Enable eval questions to walk through the 50-question set one at a
+          time — click Ask to speak each question via TTS and advance.
         </p>
 
         {/* ── session type ──────────────────────────────────────────────────── */}
@@ -224,25 +222,32 @@ export function AudioCapture() {
           </div>
         </div>
 
-        {/* ── QA flow selector ──────────────────────────────────────────────── */}
+        {/* ── QA questions toggle ───────────────────────────────────────────── */}
         <div style={styles.field}>
-          <label style={styles.label}>QA Flow (optional)</label>
-          <select
-            value={selectedFlowId ?? ""}
-            disabled={recording}
-            onChange={(e) => setSelectedFlow(e.target.value || null)}
-            style={styles.select}
-          >
-            <option value="">— None (manual session) —</option>
-            {flows.map((f, i) => (
-              <option key={f.id} value={f.id}>
-                {i + 1}. {f.title}
-              </option>
-            ))}
-          </select>
-          {selectedFlow && (
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <label style={styles.label}>Eval QA questions</label>
+            <button
+              disabled={recording}
+              onClick={() => setEvalEnabled((v) => !v)}
+              style={{
+                width: 40, height: 22, borderRadius: 11, border: "none",
+                background: evalEnabled ? "var(--accent)" : "var(--border)",
+                position: "relative",
+                cursor: recording ? "not-allowed" : "pointer",
+                transition: "background 0.2s", flexShrink: 0,
+              }}
+            >
+              <span style={{
+                position: "absolute", top: 3,
+                left: evalEnabled ? 21 : 3,
+                width: 16, height: 16, borderRadius: "50%",
+                background: "#fff", transition: "left 0.2s",
+              }} />
+            </button>
+          </div>
+          {evalEnabled && (
             <p style={{ ...styles.muted, fontSize: "0.75rem" }}>
-              {selectedFlow.questions.length} questions — auto-injected via TTS after each agent response
+              {evalQuestions.length} questions loaded — ask one at a time via TTS
             </p>
           )}
         </div>
@@ -347,7 +352,7 @@ export function AudioCapture() {
         </div>
 
         {/* ── question panel ────────────────────────────────────────────────── */}
-        {recording && totalQuestions != null && (
+        {recording && totalQuestions != null && totalQuestions > 0 && (
           <div style={styles.questionBox}>
             {allAsked ? (
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -368,7 +373,7 @@ export function AudioCapture() {
                 </div>
 
                 {/* question text */}
-                {selectedFlow && currentQuestion != null && currentQuestion < selectedFlow.questions.length && (
+                {currentQuestion != null && currentQuestion < evalQuestions.length && (
                   <p style={{ fontSize: "0.85rem", color: "var(--text)", lineHeight: 1.5, margin: "0 0 12px" }}>
                     <span style={{
                       fontSize: "0.72rem", fontWeight: 700, color: "var(--text-muted)",
@@ -376,7 +381,7 @@ export function AudioCapture() {
                     }}>
                       Q{currentQuestion + 1}/{totalQuestions}
                     </span>
-                    {selectedFlow.questions[currentQuestion]}
+                    {evalQuestions[currentQuestion]?.question}
                   </p>
                 )}
 

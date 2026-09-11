@@ -1,0 +1,352 @@
+[
+  {
+    "id": "q01",
+    "question": "How do I submit a pre-recorded audio file to the API?",
+    "source_flow": "flow_09",
+    "source_topic": "Speech-to-Text / Pre-recorded & Features",
+    "source_index": 1
+  },
+  {
+    "id": "q02",
+    "question": "What is eager end of turn and when should I turn it on?",
+    "source_flow": "flow_02",
+    "source_topic": "Speech-to-Text / Flux",
+    "source_index": 4
+  },
+  {
+    "id": "q03",
+    "question": "My recordings have a lot of medical terminology \u2014 will Nova three handle that without custom training?",
+    "source_flow": "flow_01",
+    "source_topic": "Speech-to-Text / Models",
+    "source_index": 3
+  },
+  {
+    "id": "q04",
+    "question": "I'm building on Amazon Connect for a call center \u2014 is Deepgram compatible with that?",
+    "source_flow": "flow_10",
+    "source_topic": "Integrations / Platform",
+    "source_index": 4
+  },
+  {
+    "id": "q05",
+    "question": "What does the API endpoint look like for Flux TTS versus the Aura endpoint?",
+    "source_flow": "flow_04",
+    "source_topic": "Text-to-Speech / Flux",
+    "source_index": 5
+  },
+  {
+    "id": "q06",
+    "question": "Why would I choose Flux TTS over Aura two for a new project?",
+    "source_flow": "flow_04",
+    "source_topic": "Text-to-Speech / Flux",
+    "source_index": 1
+  },
+  {
+    "id": "q07",
+    "question": "Is there any way to control speaking rate, pitch, or emphasis?",
+    "source_flow": "flow_03",
+    "source_topic": "Text-to-Speech / Aura",
+    "source_index": 8
+  },
+  {
+    "id": "q08",
+    "question": "I'm already using Nova three in my voice agent \u2014 what would I gain by switching to Flux?",
+    "source_flow": "flow_02",
+    "source_topic": "Speech-to-Text / Flux",
+    "source_index": 7
+  },
+  {
+    "id": "q09",
+    "question": "My voice agent cuts off users too early \u2014 should I raise or lower the eot threshold?",
+    "source_flow": "flow_02",
+    "source_topic": "Speech-to-Text / Flux",
+    "source_index": 3
+  },
+  {
+    "id": "q10",
+    "question": "Is there automatic punctuation and sentence formatting, or do I get raw text?",
+    "source_flow": "flow_09",
+    "source_topic": "Speech-to-Text / Pre-recorded & Features",
+    "source_index": 6
+  },
+  {
+    "id": "q11",
+    "question": "How do I add a team member to my Deepgram project with limited permissions?",
+    "source_flow": "flow_07",
+    "source_topic": "Auth / Account Management",
+    "source_index": 9
+  },
+  {
+    "id": "q12",
+    "question": "What does end-of-turn detection mean and why does it matter for voice agents?",
+    "source_flow": "flow_02",
+    "source_topic": "Speech-to-Text / Flux",
+    "source_index": 1
+  },
+  {
+    "id": "q13",
+    "question": "Is there a Go SDK available?",
+    "source_flow": "flow_08",
+    "source_topic": "SDKs / CLI",
+    "source_index": 5
+  },
+  {
+    "id": "q14",
+    "question": "What does the FunctionCallRequest look like when the agent decides to call my function?",
+    "source_flow": "flow_06",
+    "source_topic": "Voice Agent API / Functions",
+    "source_index": 4
+  },
+  {
+    "id": "q15",
+    "question": "I need to transcribe audio in Japanese and Portuguese \u2014 does Nova three support those?",
+    "source_flow": "flow_01",
+    "source_topic": "Speech-to-Text / Models",
+    "source_index": 4
+  },
+  {
+    "id": "q16",
+    "question": "My company has data sovereignty requirements and can't use cloud APIs \u2014 does Deepgram offer on-premises deployment?",
+    "source_flow": "flow_10",
+    "source_topic": "Integrations / Platform",
+    "source_index": 7
+  },
+  {
+    "id": "q17",
+    "question": "I have files that take a while to process \u2014 is there a way to get notified via webhook when done instead of polling?",
+    "source_flow": "flow_09",
+    "source_topic": "Speech-to-Text / Pre-recorded & Features",
+    "source_index": 8
+  },
+  {
+    "id": "q18",
+    "question": "Can I stream the TTS audio back in real time instead of waiting for the whole clip?",
+    "source_flow": "flow_03",
+    "source_topic": "Text-to-Speech / Aura",
+    "source_index": 7
+  },
+  {
+    "id": "q19",
+    "question": "Are there any latency differences between streaming TTS and a single full-request approach?",
+    "source_flow": "flow_03",
+    "source_topic": "Text-to-Speech / Aura",
+    "source_index": 9
+  },
+  {
+    "id": "q20",
+    "question": "What scopes are available and how do I set them when creating a key?",
+    "source_flow": "flow_07",
+    "source_topic": "Auth / Account Management",
+    "source_index": 4
+  },
+  {
+    "id": "q21",
+    "question": "How do I install the CLI and authenticate it with my API key?",
+    "source_flow": "flow_08",
+    "source_topic": "SDKs / CLI",
+    "source_index": 7
+  },
+  {
+    "id": "q22",
+    "question": "How do I enable speaker diarization in my API request?",
+    "source_flow": "flow_09",
+    "source_topic": "Speech-to-Text / Pre-recorded & Features",
+    "source_index": 4
+  },
+  {
+    "id": "q23",
+    "question": "I'm working in Python \u2014 how do I install and get started with the Python SDK?",
+    "source_flow": "flow_08",
+    "source_topic": "SDKs / CLI",
+    "source_index": 1
+  },
+  {
+    "id": "q24",
+    "question": "My app needs to speak in Spanish and French as well as English \u2014 what model do I use for that?",
+    "source_flow": "flow_03",
+    "source_topic": "Text-to-Speech / Aura",
+    "source_index": 5
+  },
+  {
+    "id": "q25",
+    "question": "What's the maximum file size or duration I can submit for batch transcription?",
+    "source_flow": "flow_09",
+    "source_topic": "Speech-to-Text / Pre-recorded & Features",
+    "source_index": 9
+  },
+  {
+    "id": "q26",
+    "question": "How do I define a function in the Settings message \u2014 what fields are required?",
+    "source_flow": "flow_06",
+    "source_topic": "Voice Agent API / Functions",
+    "source_index": 3
+  },
+  {
+    "id": "q27",
+    "question": "Does Deepgram work with LiveKit for WebRTC-based voice applications?",
+    "source_flow": "flow_10",
+    "source_topic": "Integrations / Platform",
+    "source_index": 3
+  },
+  {
+    "id": "q28",
+    "question": "Can the agent call more than one function in a single turn?",
+    "source_flow": "flow_06",
+    "source_topic": "Voice Agent API / Functions",
+    "source_index": 7
+  },
+  {
+    "id": "q29",
+    "question": "Can the Voice Agent API handle inbound phone calls directly, like as a Twilio webhook?",
+    "source_flow": "flow_10",
+    "source_topic": "Integrations / Platform",
+    "source_index": 5
+  },
+  {
+    "id": "q30",
+    "question": "What is the Nova three model and what kinds of audio is it best at?",
+    "source_flow": "flow_01",
+    "source_topic": "Speech-to-Text / Models",
+    "source_index": 0
+  },
+  {
+    "id": "q31",
+    "question": "I want to add voice output to my app \u2014 what text-to-speech options does Deepgram offer?",
+    "source_flow": "flow_03",
+    "source_topic": "Text-to-Speech / Aura",
+    "source_index": 0
+  },
+  {
+    "id": "q32",
+    "question": "Can I use Deepgram with Twilio to transcribe phone calls in real time?",
+    "source_flow": "flow_10",
+    "source_topic": "Integrations / Platform",
+    "source_index": 0
+  },
+  {
+    "id": "q33",
+    "question": "Which LLM providers and models can I use for the thinking component?",
+    "source_flow": "flow_05",
+    "source_topic": "Voice Agent API / Setup",
+    "source_index": 3
+  },
+  {
+    "id": "q34",
+    "question": "Does the CLI support text to speech output as well as transcription?",
+    "source_flow": "flow_08",
+    "source_topic": "SDKs / CLI",
+    "source_index": 9
+  },
+  {
+    "id": "q35",
+    "question": "What does migration from Nova to Flux actually look like in my code?",
+    "source_flow": "flow_02",
+    "source_topic": "Speech-to-Text / Flux",
+    "source_index": 9
+  },
+  {
+    "id": "q36",
+    "question": "What audio and video formats does Deepgram accept for pre-recorded transcription?",
+    "source_flow": "flow_09",
+    "source_topic": "Speech-to-Text / Pre-recorded & Features",
+    "source_index": 2
+  },
+  {
+    "id": "q37",
+    "question": "Is there a way to monitor how much API usage I've consumed this month?",
+    "source_flow": "flow_07",
+    "source_topic": "Auth / Account Management",
+    "source_index": 7
+  },
+  {
+    "id": "q38",
+    "question": "Can I use Nova three for both real-time streaming and batch files, or just one?",
+    "source_flow": "flow_01",
+    "source_topic": "Speech-to-Text / Models",
+    "source_index": 6
+  },
+  {
+    "id": "q39",
+    "question": "How do I actually specify Nova three in an API request?",
+    "source_flow": "flow_01",
+    "source_topic": "Speech-to-Text / Models",
+    "source_index": 5
+  },
+  {
+    "id": "q40",
+    "question": "What audio formats does the API return \u2014 can I get MP3?",
+    "source_flow": "flow_03",
+    "source_topic": "Text-to-Speech / Aura",
+    "source_index": 4
+  },
+  {
+    "id": "q41",
+    "question": "How do I create a new API key for my project?",
+    "source_flow": "flow_07",
+    "source_topic": "Auth / Account Management",
+    "source_index": 2
+  },
+  {
+    "id": "q42",
+    "question": "Is there a difference between American, British, and Irish English voices in terms of quality?",
+    "source_flow": "flow_03",
+    "source_topic": "Text-to-Speech / Aura",
+    "source_index": 2
+  },
+  {
+    "id": "q43",
+    "question": "What happens if I hit the concurrency limit \u2014 do requests fail or queue?",
+    "source_flow": "flow_07",
+    "source_topic": "Auth / Account Management",
+    "source_index": 8
+  },
+  {
+    "id": "q44",
+    "question": "What should I do if my function returns an error \u2014 how do I communicate that back gracefully?",
+    "source_flow": "flow_06",
+    "source_topic": "Voice Agent API / Functions",
+    "source_index": 8
+  },
+  {
+    "id": "q45",
+    "question": "Can I use Flux TTS for a multilingual application where users switch between English and Spanish?",
+    "source_flow": "flow_04",
+    "source_topic": "Text-to-Speech / Flux",
+    "source_index": 8
+  },
+  {
+    "id": "q46",
+    "question": "Does Flux support multiple languages or is it English only?",
+    "source_flow": "flow_02",
+    "source_topic": "Speech-to-Text / Flux",
+    "source_index": 6
+  },
+  {
+    "id": "q47",
+    "question": "What's the difference between a client-side and a server-side function in the Voice Agent API?",
+    "source_flow": "flow_06",
+    "source_topic": "Voice Agent API / Functions",
+    "source_index": 1
+  },
+  {
+    "id": "q48",
+    "question": "What's the difference between Nova three and Nova two, and when would I still pick Nova two?",
+    "source_flow": "flow_01",
+    "source_topic": "Speech-to-Text / Models",
+    "source_index": 2
+  },
+  {
+    "id": "q49",
+    "question": "How do I set a greeting the agent speaks when it first connects?",
+    "source_flow": "flow_05",
+    "source_topic": "Voice Agent API / Setup",
+    "source_index": 6
+  },
+  {
+    "id": "q50",
+    "question": "How do I get access to self-hosted Deepgram for my enterprise setup?",
+    "source_flow": "flow_10",
+    "source_topic": "Integrations / Platform",
+    "source_index": 9
+  }
+]

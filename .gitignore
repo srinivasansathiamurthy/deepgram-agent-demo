@@ -14,6 +14,8 @@ frontend/dist/
 # sessions and recordings
 sessions/
 audio_capture/
+audio_capture_baseline/
+audio_capture_iter1/
 
 # debug snapshots (regenerated on startup)
 debug/

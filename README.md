@@ -220,24 +220,13 @@ WAV files are saved to `audio_capture/<label>[_<flow_id>]_<start_ms>_<end_ms>.wa
 
 ---
 
-## Eval QA flows
+## Eval QA set
 
-`eval/chat_flows.json` contains 10 flows (10 questions each) covering:
+`eval/eval_questions.json` — 50 questions sampled from a 10×10 grid (10 topic areas × 10 questions each, drawn from `chat_flows.json`). Fixed seed so the set is identical across runs, making results comparable.
 
-| # | Topic |
-|---|-------|
-| 1 | Nova-3 STT — models, languages, features |
-| 2 | Nova-2 / Whisper STT — feature differences |
-| 3 | Aura-2 TTS — voices, encoding, streaming |
-| 4 | Aura-1 / Aura Asteria TTS |
-| 5 | Voice Agent setup and configuration |
-| 6 | Voice Agent function calling |
-| 7 | Auth, API keys, usage |
-| 8 | SDKs and CLI |
-| 9 | Pre-recorded STT features |
-| 10 | Telephony and integrations |
+Typical runs use a subset (e.g. 20 questions). Topics covered: Nova STT, Flux STT, Aura TTS, Flux TTS, Voice Agent setup, function calling, auth/keys, SDKs/CLI, pre-recorded features, telephony/integrations.
 
-`eval/rubric.md` defines 4 scoring dimensions (0–5 each): Answer Accuracy, Voice Appropriateness, Scope Adherence, Conciseness.
+**Eval methodology (`eval/rubric.md`):** head-to-head comparison, not numeric scoring. For each question a judge model (Claude) receives the control response and the experimental response and picks a winner — `control`, `experimental`, or `tie` — across 4 dimensions: Answer Accuracy, Voice Appropriateness, Scope Adherence, Conciseness. Output is a per-question winner vector and a per-dimension win count.
 
 ---
 
@@ -258,13 +247,40 @@ WAV files are saved to `audio_capture/<label>[_<flow_id>]_<start_ms>_<end_ms>.wa
 
 ---
 
-## TODO
+## Eval pipeline (`eval/judge.ipynb`)
 
-### Diarization
-- [ ] Script to split a stereo WAV from `audio_capture/` into transcripts using a Deepgram pre-recorded STT call
-- [ ] Align transcript turns to timestamps so question/answer pairs can be extracted cleanly
+Open `eval/judge.ipynb` in JupyterLab to run the full eval pipeline:
 
-### Eval comparison
-- [ ] Decide comparison format: given two session transcripts (control vs experimental), what does the judge model score and how? (well off of the rubric, but make the actual script )
-- [ ] Build the judge runner: feed `(question, control_answer, experimental_answer)` triples to Claude with the rubric, collect scores + rationale (and build the judge model)
-- [ ] Lightweight results tracker (JSON or CSV) for score delta across runs
+```bash
+pip install pandas matplotlib jupyter ipykernel   # first time only
+jupyter lab eval/judge.ipynb
+```
+
+The notebook runs end-to-end:
+
+1. **L-channel extraction** — splits the stereo WAV (L = system audio / agent voice) into a mono WAV per session
+2. **Deepgram STT** — `nova-3` pre-recorded transcription with word-level timestamps; results cached to `eval/cache/`
+3. **Q&A extraction** — fuzzy text-matches the 20 known questions in the transcript, extracts agent responses as words between question boundaries
+4. **CSV** — saves `eval/results.csv` (`q_id`, `question`, `source_topic`, `control_response`, `experimental_response`)
+5. **Claude judge** — `claude-sonnet-4-6` head-to-head verdict per question × 4 dimensions; cached to `eval/cache/judge_results.json`
+6. **Results** — saves `eval/results_judged.csv`, prints win-count table, renders bar chart + per-question heatmap
+
+---
+
+## Iteration 1 Results
+
+**Change:** contrastive examples added to system prompt targeting the three baseline failure modes (vague parameter answers, missing implementation details, taxonomy corrections that derail the response).
+
+| Dimension | Control | Experimental | vs Baseline exp |
+|---|---|---|---|
+| Answer Accuracy | 0.23 | **0.78** | +0.03 |
+| Scope Adherence | **0.53** | 0.47 | — |
+| Conciseness | **0.72** | 0.28 | **+0.11** |
+| Voice Appropriateness | **0.62** | 0.38 | — |
+| **Final** | 0.45 | **0.55** | +0.02 |
+
+**Question-level wins:** Experimental 15 · Control 4 · Ties 1
+
+Conciseness recovered from 0.17 → 0.28 (+11 pts), the primary target of this iteration. Accuracy held and ticked up slightly. Voice appropriateness and scope remain gaps.
+
+Results files: `eval/results.csv`, `eval/results_judged.csv`, `eval/results_chart.png`
