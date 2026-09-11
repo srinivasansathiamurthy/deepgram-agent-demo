@@ -265,8 +265,22 @@ The notebook runs end-to-end:
 5. **Claude judge** — `claude-sonnet-4-6` head-to-head verdict per question × 4 dimensions; cached to `eval/cache/judge_results.json`
 6. **Results** — saves `eval/results_judged.csv`, prints win-count table, renders bar chart + per-question heatmap
 
-## TODO
+---
 
-- [ ] Re-run eval with more questions (currently using N=20 of 50)
-- [ ] Add a second experimental variant to compare three agents simultaneously
-- [ ] Export per-session metrics to `eval/results/<run_id>.json` for longitudinal tracking
+## Iteration 1 Results
+
+**Change:** contrastive examples added to system prompt targeting the three baseline failure modes (vague parameter answers, missing implementation details, taxonomy corrections that derail the response).
+
+| Dimension | Control | Experimental | vs Baseline exp |
+|---|---|---|---|
+| Answer Accuracy | 0.23 | **0.78** | +0.03 |
+| Scope Adherence | **0.53** | 0.47 | — |
+| Conciseness | **0.72** | 0.28 | **+0.11** |
+| Voice Appropriateness | **0.62** | 0.38 | — |
+| **Final** | 0.45 | **0.55** | +0.02 |
+
+**Question-level wins:** Experimental 15 · Control 4 · Ties 1
+
+Conciseness recovered from 0.17 → 0.28 (+11 pts), the primary target of this iteration. Accuracy held and ticked up slightly. Voice appropriateness and scope remain gaps.
+
+Results files: `eval/results.csv`, `eval/results_judged.csv`, `eval/results_chart.png`
