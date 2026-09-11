@@ -25,10 +25,17 @@ deepgram-agent-demo/
 │       └── components/
 │           ├── AudioCapture.tsx       # Audio Capture tab — recording + QA flow runner
 │           ├── ChatHistory.tsx        # transcript display
+│           ├── EvalTab.tsx            # eval QA flow runner (device select, flow select, ask-next)
 │           └── StatusOrb.tsx          # animated connection indicator
 ├── eval/
-│   ├── chat_flows.json   # 10 QA flows (10 questions each) covering docs + api_docs
-│   └── rubric.md         # 4-dimension scoring rubric (accuracy, voice, scope, conciseness)
+│   ├── chat_flows.json      # 10 QA flows (10 questions each) covering docs + api_docs
+│   ├── eval_questions.json  # 50-question fixed eval set (10×10 grid, seeded)
+│   ├── judge.ipynb          # end-to-end eval pipeline: STT → Q&A extraction → judge → results
+│   ├── rubric.md            # 4-dimension scoring rubric (accuracy, voice, scope, conciseness)
+│   ├── results.csv          # per-question control + experimental responses
+│   ├── results_judged.csv   # per-question scores across 4 dimensions
+│   ├── results_chart.png    # bar chart + heatmap from latest run
+│   └── cache/               # STT transcripts + judge verdicts cached by session/question
 ├── sessions/          # auto-created; one folder per voice agent session
 ├── audio_capture/     # auto-created; WAV files from the Capture tab
 ├── Pipfile            # Python dependencies (pipenv)
