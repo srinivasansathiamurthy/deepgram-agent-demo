@@ -265,6 +265,26 @@ The notebook runs end-to-end:
 5. **Claude judge** — `claude-sonnet-4-6` head-to-head verdict per question × 4 dimensions; cached to `eval/cache/judge_results.json`
 6. **Results** — saves `eval/results_judged.csv`, prints win-count table, renders bar chart + per-question heatmap
 
+## Baseline Benchmark Results
+
+This branch captures the **baseline benchmark** run: the agent without doc retrieval (control) vs. the agent with live `lookup_deepgram_docs` function calling (experimental), evaluated on N=20 questions.
+
+| Dimension | Control | Experimental |
+|---|---|---|
+| Answer Accuracy | 0.25 | **0.75** |
+| Scope Adherence | 0.50 | 0.50 |
+| Conciseness | **0.82** | 0.17 |
+| Voice Appropriateness | **0.55** | 0.45 |
+| **Final (weighted)** | 0.47 | **0.53** |
+
+**Question-level wins:** Experimental 15 · Control 5 · Ties 0
+
+Key takeaway: doc retrieval gives a large accuracy boost (+50 pts) but hurts conciseness significantly. Future iterations should focus on keeping answers tighter when the agent pulls from docs.
+
+Results files: `eval/results.csv`, `eval/results_judged.csv`, `eval/results_chart.png`
+
+---
+
 ## TODO
 
 - [ ] Re-run eval with more questions (currently using N=20 of 50)
