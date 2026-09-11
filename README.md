@@ -265,6 +265,6 @@ WAV files are saved to `audio_capture/<label>[_<flow_id>]_<start_ms>_<end_ms>.wa
 - [ ] Align transcript turns to timestamps so question/answer pairs can be extracted cleanly
 
 ### Eval comparison
-- [ ] Decide comparison format: given two session transcripts (control vs experimental), what does the judge model score and how?
-- [ ] Build the judge runner: feed `(question, control_answer, experimental_answer)` triples to Claude with the rubric, collect scores + rationale
+- [ ] Decide comparison format: given two session transcripts (control vs experimental), what does the judge model score and how? (well off of the rubric, but make the actual script )
+- [ ] Build the judge runner: feed `(question, control_answer, experimental_answer)` triples to Claude with the rubric, collect scores + rationale (and build the judge model)
 - [ ] Lightweight results tracker (JSON or CSV) for score delta across runs
