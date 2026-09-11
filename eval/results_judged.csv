@@ -1,0 +1,21 @@
+q_id,question,control_answer_accuracy,experimental_answer_accuracy,control_scope_adherence,experimental_scope_adherence,control_conciseness,experimental_conciseness,control_voice_appropriateness,experimental_voice_appropriateness,control_final,experimental_final
+q01,How do I submit a pre-recorded audio file to the API?,0.0,1.0,0.5,0.5,0.0,1.0,0.0,1.0,0.15,0.85
+q02,What is eager end of turn and when should I turn it on?,0.0,1.0,0.5,0.5,1.0,0.0,0.0,1.0,0.35,0.65
+q03,My recordings have a lot of medical terminology — will Nova three handle that without custom training?,1.0,0.0,0.5,0.5,1.0,0.0,0.0,1.0,0.75,0.25
+q04,I'm building on Amazon Connect for a call center — is Deepgram compatible with that?,0.0,1.0,0.5,0.5,1.0,0.0,0.5,0.5,0.4,0.6
+q05,What does the API endpoint look like for Flux TTS versus the Aura endpoint?,0.5,0.5,0.5,0.5,1.0,0.0,1.0,0.0,0.65,0.35
+q06,Why would I choose Flux TTS over Aura two for a new project?,0.0,1.0,0.5,0.5,1.0,0.0,1.0,0.0,0.45,0.55
+q07,"Is there any way to control speaking rate, pitch, or emphasis?",0.0,1.0,0.5,0.5,0.5,0.5,0.0,1.0,0.25,0.75
+q08,I'm already using Nova three in my voice agent — what would I gain by switching to Flux?,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0
+q09,My voice agent cuts off users too early — should I raise or lower the eot threshold?,0.5,0.5,0.5,0.5,0.0,1.0,0.0,1.0,0.35,0.65
+q10,"Is there automatic punctuation and sentence formatting, or do I get raw text?",0.0,1.0,0.5,0.5,1.0,0.0,0.0,1.0,0.35,0.65
+q11,How do I add a team member to my Deepgram project with limited permissions?,0.0,1.0,0.5,0.5,1.0,0.0,1.0,0.0,0.45,0.55
+q12,What does end-of-turn detection mean and why does it matter for voice agents?,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0
+q13,Is there a Go SDK available?,1.0,0.0,0.5,0.5,1.0,0.0,1.0,0.0,0.85,0.15
+q14,What does the FunctionCallRequest look like when the agent decides to call my function?,0.0,1.0,0.5,0.5,1.0,0.0,1.0,0.0,0.45,0.55
+q15,I need to transcribe audio in Japanese and Portuguese — does Nova three support those?,0.0,1.0,0.5,0.5,1.0,0.0,1.0,0.0,0.45,0.55
+q16,My company has data sovereignty requirements and can't use cloud APIs — does Deepgram offer on-premises deployment?,1.0,0.0,0.5,0.5,1.0,0.0,1.0,0.0,0.85,0.15
+q17,I have files that take a while to process — is there a way to get notified via webhook when done instead of polling?,0.0,1.0,0.5,0.5,1.0,0.0,0.0,1.0,0.35,0.65
+q18,Can I stream the TTS audio back in real time instead of waiting for the whole clip?,0.0,1.0,0.5,0.5,1.0,0.0,0.5,0.5,0.4,0.6
+q19,Are there any latency differences between streaming TTS and a single full-request approach?,0.0,1.0,0.5,0.5,1.0,0.0,1.0,0.0,0.45,0.55
+q20,What scopes are available and how do I set them when creating a key?,0.0,1.0,0.5,0.5,1.0,0.0,1.0,0.0,0.45,0.55

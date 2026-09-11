@@ -1,8 +1,8 @@
 """
-Eval harness — QA flows for the voice agent evaluation process.
+Eval harness routes.
 
-Routes:
-  GET  /api/eval/flows  — list of all chat flows
+  GET  /api/eval/flows      — chat flows (used by Audio Capture tab for TTS ask loop)
+  GET  /api/eval/questions  — 50 sampled eval questions for control vs experimental judging
 """
 
 import json
@@ -12,16 +12,24 @@ from fastapi import APIRouter, HTTPException
 
 router = APIRouter(prefix="/api/eval", tags=["eval"])
 
-FLOWS_FILE = Path(__file__).parent.parent / "eval" / "chat_flows.json"
+_EVAL_DIR = Path(__file__).parent.parent / "eval"
 
 
-def _load_flows() -> list[dict]:
-    return json.loads(FLOWS_FILE.read_text(encoding="utf-8"))
+def _load(filename: str) -> list[dict]:
+    return json.loads((_EVAL_DIR / filename).read_text(encoding="utf-8"))
 
 
 @router.get("/flows")
 async def get_flows():
     try:
-        return _load_flows()
+        return _load("chat_flows.json")
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
+
+@router.get("/questions")
+async def get_questions():
+    try:
+        return _load("eval_questions.json")
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))

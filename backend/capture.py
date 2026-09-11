@@ -149,11 +149,16 @@ async def start(body: StartBody):
 
         if body.flow_id:
             try:
-                flows = json.loads(_FLOWS_FILE.read_text())
-                flow = next((f for f in flows if f["id"] == body.flow_id), None)
-                if flow:
-                    _questions = flow["questions"]
-                    print(f"[capture] Loaded {len(_questions)} questions from flow '{body.flow_id}'")
+                if body.flow_id == "eval_questions":
+                    items = json.loads((_FLOWS_FILE.parent / "eval_questions.json").read_text())
+                    _questions = [item["question"] for item in items]
+                    print(f"[capture] Loaded {len(_questions)} eval questions")
+                else:
+                    flows = json.loads(_FLOWS_FILE.read_text())
+                    flow = next((f for f in flows if f["id"] == body.flow_id), None)
+                    if flow:
+                        _questions = flow["questions"]
+                        print(f"[capture] Loaded {len(_questions)} questions from flow '{body.flow_id}'")
             except Exception as exc:
                 print(f"[capture] Could not load flow: {exc}")
 
