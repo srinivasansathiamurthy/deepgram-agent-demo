@@ -284,9 +284,3 @@ Key takeaway: doc retrieval gives a large accuracy boost (+50 pts) but hurts con
 Results files: `eval/results.csv`, `eval/results_judged.csv`, `eval/results_chart.png`
 
 ---
-
-## TODO
-
-- [ ] Re-run eval with more questions (currently using N=20 of 50)
-- [ ] Add a second experimental variant to compare three agents simultaneously
-- [ ] Export per-session metrics to `eval/results/<run_id>.json` for longitudinal tracking
