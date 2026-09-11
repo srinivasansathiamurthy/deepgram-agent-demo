@@ -2,7 +2,7 @@
   {
     "answer_accuracy": "experimental",
     "scope_adherence": "tie",
-    "conciseness": "experimental",
+    "conciseness": "control",
     "voice_appropriateness": "experimental",
     "q_id": "q01"
   },
@@ -10,21 +10,21 @@
     "answer_accuracy": "experimental",
     "scope_adherence": "tie",
     "conciseness": "control",
-    "voice_appropriateness": "experimental",
+    "voice_appropriateness": "tie",
     "q_id": "q02"
   },
   {
-    "answer_accuracy": "control",
+    "answer_accuracy": "experimental",
     "scope_adherence": "tie",
     "conciseness": "control",
-    "voice_appropriateness": "experimental",
+    "voice_appropriateness": "control",
     "q_id": "q03"
   },
   {
     "answer_accuracy": "experimental",
     "scope_adherence": "tie",
     "conciseness": "control",
-    "voice_appropriateness": "tie",
+    "voice_appropriateness": "control",
     "q_id": "q04"
   },
   {
@@ -37,36 +37,36 @@
   {
     "answer_accuracy": "experimental",
     "scope_adherence": "tie",
-    "conciseness": "control",
-    "voice_appropriateness": "control",
-    "q_id": "q06"
-  },
-  {
-    "answer_accuracy": "experimental",
-    "scope_adherence": "tie",
     "conciseness": "tie",
     "voice_appropriateness": "experimental",
-    "q_id": "q07"
-  },
-  {
-    "answer_accuracy": "control",
-    "scope_adherence": "control",
-    "conciseness": "control",
-    "voice_appropriateness": "control",
-    "q_id": "q08"
+    "q_id": "q06"
   },
   {
     "answer_accuracy": "tie",
     "scope_adherence": "tie",
     "conciseness": "experimental",
-    "voice_appropriateness": "experimental",
+    "voice_appropriateness": "control",
+    "q_id": "q07"
+  },
+  {
+    "answer_accuracy": "control",
+    "scope_adherence": "control",
+    "conciseness": "tie",
+    "voice_appropriateness": "tie",
+    "q_id": "q08"
+  },
+  {
+    "answer_accuracy": "experimental",
+    "scope_adherence": "tie",
+    "conciseness": "experimental",
+    "voice_appropriateness": "control",
     "q_id": "q09"
   },
   {
     "answer_accuracy": "experimental",
     "scope_adherence": "tie",
     "conciseness": "control",
-    "voice_appropriateness": "experimental",
+    "voice_appropriateness": "tie",
     "q_id": "q10"
   },
   {
@@ -84,38 +84,38 @@
     "q_id": "q12"
   },
   {
-    "answer_accuracy": "control",
+    "answer_accuracy": "experimental",
     "scope_adherence": "tie",
     "conciseness": "control",
-    "voice_appropriateness": "control",
+    "voice_appropriateness": "tie",
     "q_id": "q13"
   },
   {
     "answer_accuracy": "experimental",
     "scope_adherence": "tie",
     "conciseness": "control",
-    "voice_appropriateness": "control",
+    "voice_appropriateness": "tie",
     "q_id": "q14"
   },
   {
     "answer_accuracy": "experimental",
     "scope_adherence": "tie",
     "conciseness": "control",
-    "voice_appropriateness": "control",
+    "voice_appropriateness": "tie",
     "q_id": "q15"
   },
   {
-    "answer_accuracy": "control",
+    "answer_accuracy": "tie",
     "scope_adherence": "tie",
-    "conciseness": "control",
-    "voice_appropriateness": "control",
+    "conciseness": "experimental",
+    "voice_appropriateness": "tie",
     "q_id": "q16"
   },
   {
-    "answer_accuracy": "experimental",
+    "answer_accuracy": "tie",
     "scope_adherence": "tie",
-    "conciseness": "control",
-    "voice_appropriateness": "experimental",
+    "conciseness": "tie",
+    "voice_appropriateness": "tie",
     "q_id": "q17"
   },
   {
@@ -126,14 +126,14 @@
     "q_id": "q18"
   },
   {
-    "answer_accuracy": "experimental",
-    "scope_adherence": "tie",
+    "answer_accuracy": "tie",
+    "scope_adherence": "control",
     "conciseness": "control",
     "voice_appropriateness": "control",
     "q_id": "q19"
   },
   {
-    "answer_accuracy": "experimental",
+    "answer_accuracy": "control",
     "scope_adherence": "tie",
     "conciseness": "control",
     "voice_appropriateness": "control",
